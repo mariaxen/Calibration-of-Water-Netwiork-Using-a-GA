@@ -1,11 +1,11 @@
 #Create a skeletonized network in the same folder
-setwd("C:/Users/Maria.Xenochristou")
+setwd("C:/.../")
 
-system("spotSkeleton BWWV15_New_C.inp 300 BWWV15_New.inp")
+system("spotSkeleton NameofInputFile.inp 300 NameofSkeletonizedFile.inp")
 
-#Take calibration data from another network############
+#Take calibration data from the original network############
 # Open the EPANET toolkit & hydraulics solver
-ENopen("BWWV15_New.inp", "BWWV15_New.rpt", "")
+ENopen("NameofInputFile.inp", "NameofInputFile.rpt", "")
 ENopenH()
 ENsettimeparam("EN_HYDSTEP", 3600)
 ENsettimeparam("EN_QUALSTEP", 3600)
@@ -57,7 +57,7 @@ ENclose()
 ###########
 
 #Open the skeletonized network you want to calibrate#####
-ENopen("BWWV15.inp", "BWWV15.rpt", "")
+ENopen("NameofSkeletonizedFile.inp", "NameofSkeletonizedFile.rpt", "")
 
 ENsettimeparam("EN_HYDSTEP", 3600)
 ENsettimeparam("EN_QUALSTEP", 3600)
@@ -77,7 +77,7 @@ GA <- ga(type="real-valued", fitness = function(x) -calibObj_2(node_orig, variab
          keepBest = TRUE)
 
 #Save an input file with the new roughness coefficients
-ENsaveinpfile("//marral.local/Data/Users/Maria.Xenochristou/Desktop/Bristol_GA.inp")
+ENsaveinpfile("//.../CalibratedNetwork.inp")
 
 ENcloseH()
 ENclose()
